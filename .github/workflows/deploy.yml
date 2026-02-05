@@ -67,8 +67,8 @@ jobs:
           FULL_IMAGE="$REGISTRY/$REPO:$TAG"
 
           # 2. SSM Send-Command를 통해 EC2 내부에서 실행될 명령어를 전달합니다.
-          aws ssm send-command 
-            --instance-ids "${{ secrets.EC2_INSTANCE_ID }}" 
+          aws ssm send-command \
+            --targets "Key=tag:deploygroup,Values=nginx" \
             --document-name "AWS-RunShellScript" 
             --comment "Deploying Nginx via GitHub Actions" 
             --region ${{ secrets.AWS_REGION }} 
