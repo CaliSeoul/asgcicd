@@ -1,8 +1,9 @@
 # Use the official Nginx image from Docker Hub
 FROM nginx:latest
 
-# The Nginx image already serves files from /usr/share/nginx/html
-# and includes a default configuration.
-# Our custom config and html files will be mounted at runtime from the EC2 host.
-# Therefore, we don't need to copy any files here.
-# This keeps the image generic and lightweight.
+# Remove the default nginx index page
+RUN rm /usr/share/nginx/html/index.html
+
+# Copy our custom html and configuration files
+COPY ./html/ /usr/share/nginx/html/
+COPY ./default.conf /etc/nginx/conf.d/default.conf
