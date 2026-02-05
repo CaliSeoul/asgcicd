@@ -68,7 +68,7 @@ jobs:
 
           # 2. SSM Send-Command를 통해 EC2 내부에서 실행될 명령어를 전달합니다.
           aws ssm send-command \
-            --targets "Key=tag:deploygroup,Values=nginx" \
+            --targets "Key=tag:deploygroup,Values=container-asg" \
             --document-name "AWS-RunShellScript" 
             --comment "Deploying Nginx via GitHub Actions" 
             --region ${{ secrets.AWS_REGION }} 
